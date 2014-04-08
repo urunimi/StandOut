@@ -791,9 +791,7 @@ public abstract class StandOutWindow extends Service {
 		LinearLayout list = new LinearLayout(this);
 		list.setOrientation(LinearLayout.VERTICAL);
 
-		final PopupWindow dropDown = new PopupWindow(list,
-				StandOutLayoutParams.WRAP_CONTENT,
-				StandOutLayoutParams.WRAP_CONTENT, true);
+		final PopupWindow dropDown = new PopupWindow(list, StandOutLayoutParams.WRAP_CONTENT, StandOutLayoutParams.WRAP_CONTENT, true);
 
 		for (final DropDownListItem item : items) {
 			ViewGroup listItem = (ViewGroup) mLayoutInflater.inflate(
@@ -818,7 +816,7 @@ public abstract class StandOutWindow extends Service {
 		}
 
 		Drawable background = getResources().getDrawable(
-				android.R.drawable.editbox_dropdown_dark_frame);
+				android.R.drawable.editbox_dropdown_light_frame);
 		dropDown.setBackgroundDrawable(background);
 		return dropDown;
 	}
@@ -1574,8 +1572,7 @@ public abstract class StandOutWindow extends Service {
 	 * @param event
 	 * @return
 	 */
-	public boolean onTouchHandleMove(int id, Window window, View view,
-			MotionEvent event) {
+	public boolean onTouchHandleMove(int id, Window window, View view, MotionEvent event) {
 		StandOutLayoutParams params = window.getLayoutParams();
 
 		// how much you have to move in either direction in order for the
@@ -1605,18 +1602,20 @@ public abstract class StandOutWindow extends Service {
 					window.touchInfo.moving = true;
 
 					// if window is moveable
-					if (Utils.isSet(window.flags,
-							StandOutFlags.FLAG_BODY_MOVE_ENABLE)) {
+					if (Utils.isSet(window.flags, StandOutFlags.FLAG_BODY_MOVE_ENABLE)) {
 
 						// update the position of the window
 						if (event.getPointerCount() == 1) {
 							params.x += deltaX;
 							params.y += deltaY;
+//							Log.v(TAG, "params.x - " + params.x + ", deltaX - " + deltaX);
 						}
 
 						window.edit().setPosition(params.x, params.y).commit();
+//						Log.d(TAG, "params.x - " + params.x + ", deltaX - " + deltaX + ", window.touchInfo.moving - " + window.touchInfo.moving);
 					}
 				}
+
 				break;
 			case MotionEvent.ACTION_UP:
 				window.touchInfo.moving = false;
@@ -1626,10 +1625,7 @@ public abstract class StandOutWindow extends Service {
 					// bring to front on tap
 					boolean tap = Math.abs(totalDeltaX) < params.threshold
 							&& Math.abs(totalDeltaY) < params.threshold;
-					if (tap
-							&& Utils.isSet(
-									window.flags,
-									StandOutFlags.FLAG_WINDOW_BRING_TO_FRONT_ON_TAP)) {
+					if (tap && Utils.isSet(window.flags, StandOutFlags.FLAG_WINDOW_BRING_TO_FRONT_ON_TAP)) {
 						StandOutWindow.this.bringToFront(id);
 					}
 				}
@@ -1661,8 +1657,7 @@ public abstract class StandOutWindow extends Service {
 	 */
 	public boolean onTouchHandleResize(int id, Window window, View view,
 			MotionEvent event) {
-		StandOutLayoutParams params = (StandOutLayoutParams) window
-				.getLayoutParams();
+		StandOutLayoutParams params = (StandOutLayoutParams) window.getLayoutParams();
 
 		switch (event.getAction()) {
 			case MotionEvent.ACTION_DOWN:
@@ -1691,7 +1686,9 @@ public abstract class StandOutWindow extends Service {
 					window.touchInfo.lastY = (int) event.getRawY();
 				}
 
-				window.edit().setSize(params.width, params.height).commit();
+				if(params.width >= 1 && params.height >= 1) {
+					window.edit().setSize(params.width, params.height).commit();
+				}
 				break;
 			case MotionEvent.ACTION_UP:
 				break;

@@ -375,12 +375,10 @@ public class Window extends FrameLayout {
 	 * @return The frame view containing the system window decorations.
 	 */
 	private View getSystemDecorations() {
-		final View decorations = mLayoutInflater.inflate(
-				R.layout.system_window_decorators, null);
+		final View decorations = mLayoutInflater.inflate( R.layout.system_window_decorators, null);
 
 		// icon
-		final ImageView icon = (ImageView) decorations
-				.findViewById(R.id.window_icon);
+		final ImageView icon = (ImageView) decorations.findViewById(R.id.window_icon);
 		icon.setImageResource(mContext.getAppIcon());
 		icon.setOnClickListener(new OnClickListener() {
 
@@ -461,9 +459,7 @@ public class Window extends FrameLayout {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// handle dragging to move
-				boolean consumed = mContext.onTouchHandleMove(id, Window.this,
-						v, event);
-				return consumed;
+				return mContext.onTouchHandleMove(id, Window.this, v, event);
 			}
 		});
 
@@ -818,10 +814,8 @@ public class Window extends FrameLayout {
 					}
 
 					// keep window inside edges
-					mParams.x = Math.min(Math.max(mParams.x, 0), displayWidth
-							- mParams.width);
-					mParams.y = Math.min(Math.max(mParams.y, 0), displayHeight
-							- mParams.height);
+//					mParams.x = Math.min(Math.max(mParams.x, 0), displayWidth - mParams.width);
+//					mParams.y = Math.min(Math.max(mParams.y, 0), displayHeight - mParams.height);
 				}
 			}
 
