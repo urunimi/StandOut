@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/titlebar"
         android:layout_width="fill_parent"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:background="#FFF"
         android:gravity="center_vertical"
@@ -20,6 +20,7 @@
             android:id="@+id/window_icon"
             android:layout_width="32dp"
             android:layout_height="32dp"
+			android:scaleType="centerInside"
             android:contentDescription="@string/window_icon" />
 
         <TextView
@@ -68,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+		android:padding="3dp"
         android:contentDescription="@string/corner"
         android:src="@drawable/corner" />
 
