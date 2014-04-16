@@ -373,7 +373,7 @@ public abstract class StandOutWindow extends Service {
 
 			// this will interfere with getPersistentNotification()
 			if (id == ONGOING_NOTIFICATION_ID) {
-				throw new RuntimeException(
+				Log.w(TAG, 
 						"ID cannot equals StandOutWindow.ONGOING_NOTIFICATION_ID");
 			}
 
@@ -1061,7 +1061,7 @@ public abstract class StandOutWindow extends Service {
 	 *            The id of the window.
 	 * @return The window shown.
 	 */
-	public final synchronized Window show(int id) {
+	public synchronized Window show(int id) {
 		// get the window corresponding to the id
 		Window cachedWindow = getWindow(id);
 		final Window window;
@@ -1074,8 +1074,8 @@ public abstract class StandOutWindow extends Service {
 		}
 
 		if (window.visibility == Window.VISIBILITY_VISIBLE) {
-			throw new IllegalStateException("Tried to show(" + id
-					+ ") a window that is already shown.");
+			
+			Log.w(TAG, "Tried to show(" + id + ") a window that is already shown.");
 		}
 
 		// alert callbacks and cancel if instructed
@@ -1130,7 +1130,7 @@ public abstract class StandOutWindow extends Service {
 		} else {
 			// notification can only be null if it was provided before
 			if (!startedForeground) {
-				throw new RuntimeException("Your StandOutWindow service must"
+				Log.w(TAG, "Your StandOutWindow service must"
 						+ "provide a persistent notification."
 						+ "The notification prevents Android"
 						+ "from killing your service in low"
@@ -1155,7 +1155,7 @@ public abstract class StandOutWindow extends Service {
 		final Window window = getWindow(id);
 
 		if (window == null) {
-			throw new IllegalArgumentException("Tried to hide(" + id
+			Log.w(TAG, "Tried to hide(" + id
 					+ ") a null window.");
 		}
 
@@ -1234,7 +1234,7 @@ public abstract class StandOutWindow extends Service {
 		final Window window = getWindow(id);
 
 		if (window == null) {
-			throw new IllegalArgumentException("Tried to close(" + id
+			Log.w(TAG, "Tried to close(" + id
 					+ ") a null window.");
 		}
 
@@ -1372,7 +1372,7 @@ public abstract class StandOutWindow extends Service {
 	public final synchronized void bringToFront(int id) {
 		Window window = getWindow(id);
 		if (window == null) {
-			throw new IllegalArgumentException("Tried to bringToFront(" + id
+			Log.w(TAG, "Tried to bringToFront(" + id
 					+ ") a null window.");
 		}
 
@@ -1421,7 +1421,7 @@ public abstract class StandOutWindow extends Service {
 		final Window window = getWindow(id);
 		if (window == null) {
 			return false;
-//			throw new IllegalArgumentException("Tried to focus(" + id
+//			Log.w(TAG, "Tried to focus(" + id
 //					+ ") a null window.");
 		}
 
@@ -1710,7 +1710,7 @@ public abstract class StandOutWindow extends Service {
 	 */
 	public synchronized boolean unfocus(Window window) {
 		if (window == null) {
-			throw new IllegalArgumentException(
+			Log.w(TAG, 
 					"Tried to unfocus a null window.");
 		}
 		return window.onFocus(false);
@@ -1728,7 +1728,7 @@ public abstract class StandOutWindow extends Service {
 		Window window = getWindow(id);
 
 		if (window == null) {
-			throw new IllegalArgumentException("Tried to updateViewLayout("
+			Log.w(TAG, "Tried to updateViewLayout("
 					+ id + ") a null window.");
 		}
 
