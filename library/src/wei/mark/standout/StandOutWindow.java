@@ -374,7 +374,7 @@ public abstract class StandOutWindow extends Service {
 			// this will interfere with getPersistentNotification()
 			if (id == ONGOING_NOTIFICATION_ID) {
 				Log.w(TAG, 
-						"ID cannot equals StandOutWindow.ONGOING_NOTIFICATION_ID");
+						"ID cannot equals StandOutWindow.ONGOING_NOTIFICATION_ID");  return START_NOT_STICKY;
 			}
 
 			if (ACTION_SHOW.equals(action) || ACTION_RESTORE.equals(action)) {
@@ -1156,7 +1156,7 @@ public abstract class StandOutWindow extends Service {
 
 		if (window == null) {
 			Log.w(TAG, "Tried to hide(" + id
-					+ ") a null window.");
+					+ ") a null window."); return;
 		}
 
 		if (window.visibility == Window.VISIBILITY_GONE) {
@@ -1235,7 +1235,7 @@ public abstract class StandOutWindow extends Service {
 
 		if (window == null) {
 			Log.w(TAG, "Tried to close(" + id
-					+ ") a null window.");
+					+ ") a null window."); return;
 		}
 
 		if (window.visibility == Window.VISIBILITY_TRANSITION) {
@@ -1373,7 +1373,7 @@ public abstract class StandOutWindow extends Service {
 		Window window = getWindow(id);
 		if (window == null) {
 			Log.w(TAG, "Tried to bringToFront(" + id
-					+ ") a null window.");
+					+ ") a null window."); return;
 		}
 
 		if (window.visibility == Window.VISIBILITY_GONE) {
@@ -1711,7 +1711,7 @@ public abstract class StandOutWindow extends Service {
 	public synchronized boolean unfocus(Window window) {
 		if (window == null) {
 			Log.w(TAG, 
-					"Tried to unfocus a null window.");
+					"Tried to unfocus a null window."); return false;
 		}
 		return window.onFocus(false);
 	}
@@ -1729,7 +1729,7 @@ public abstract class StandOutWindow extends Service {
 
 		if (window == null) {
 			Log.w(TAG, "Tried to updateViewLayout("
-					+ id + ") a null window.");
+					+ id + ") a null window."); return;
 		}
 
 		if (window.visibility == Window.VISIBILITY_GONE) {
