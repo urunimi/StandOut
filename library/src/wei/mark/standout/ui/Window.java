@@ -379,17 +379,22 @@ public class Window extends FrameLayout {
 
 		// icon
 		final ImageView icon = (ImageView) decorations.findViewById(R.id.window_icon);
-		icon.setImageResource(mContext.getAppIcon());
-		icon.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				PopupWindow dropDown = mContext.getDropDown(id);
-				if (dropDown != null) {
-					dropDown.showAsDropDown(icon);
+		if(mContext.getAppIcon() > 0) {
+			icon.setImageResource(mContext.getAppIcon());
+			icon.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					PopupWindow dropDown = mContext.getDropDown(id);
+					if (dropDown != null) {
+						dropDown.showAsDropDown(icon);
+					}
 				}
-			}
-		});
+			});
+		} else {
+			icon.setVisibility(View.GONE);
+		}
 
 		// title
 		TextView title = (TextView) decorations.findViewById(R.id.title);
