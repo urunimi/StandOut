@@ -1728,8 +1728,7 @@ public abstract class StandOutWindow extends Service {
 		Window window = getWindow(id);
 
 		if (window == null) {
-			Log.w(TAG, "Tried to updateViewLayout("
-					+ id + ") a null window."); return;
+			Log.w(TAG, "Tried to updateViewLayout(" + id + ") a null window."); return;
 		}
 
 		if (window.visibility == Window.VISIBILITY_GONE) {
