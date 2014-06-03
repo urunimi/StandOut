@@ -13,8 +13,7 @@
         android:layout_alignParentTop="true"
         android:background="#FFF"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="4dp" >
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/window_icon"
@@ -69,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-		android:padding="3dp"
+		android:padding="1dp"
         android:contentDescription="@string/corner"
         android:src="@drawable/corner" />
 
