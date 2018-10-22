@@ -1,12 +1,5 @@
 package wei.mark.standout;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
-import wei.mark.standout.constants.StandOutFlags;
-import wei.mark.standout.ui.Window;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -36,6 +29,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import wei.mark.standout.constants.StandOutFlags;
+import wei.mark.standout.ui.Window;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Extend this class to easily create and manage floating StandOut windows.
@@ -655,10 +655,13 @@ public abstract class StandOutWindow extends Service {
 					PendingIntent.FLAG_UPDATE_CURRENT);
 		}
 
-		Notification notification = new Notification(icon, tickerText, when);
-		notification.setLatestEventInfo(c, contentTitle, contentText,
-				contentIntent);
-		return notification;
+		Notification.Builder builder = new Notification.Builder(c);
+		builder.setSmallIcon(icon)
+				.setTicker(tickerText)
+				.setWhen(when)
+				.setContentTitle(contentTitle).setContentText(contentText).setContentIntent(contentIntent);
+
+		return builder.build();
 	}
 
 	/**
@@ -699,10 +702,13 @@ public abstract class StandOutWindow extends Service {
 					PendingIntent.FLAG_UPDATE_CURRENT);
 		}
 
-		Notification notification = new Notification(icon, tickerText, when);
-		notification.setLatestEventInfo(c, contentTitle, contentText,
-				contentIntent);
-		return notification;
+		Notification.Builder builder = new Notification.Builder(c);
+		builder.setSmallIcon(icon)
+				.setTicker(tickerText)
+				.setWhen(when)
+				.setContentTitle(contentTitle).setContentText(contentText).setContentIntent(contentIntent);
+
+		return builder.build();
 	}
 
 	/**
@@ -1803,7 +1809,7 @@ public abstract class StandOutWindow extends Service {
 		 *            The id of the window.
 		 */
 		public StandOutLayoutParams(int id) {
-			super(200, 200, TYPE_PHONE,
+			super(200, 200, TYPE_APPLICATION_OVERLAY,
 					StandOutLayoutParams.FLAG_NOT_TOUCH_MODAL
 							| StandOutLayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
 					PixelFormat.TRANSLUCENT);
