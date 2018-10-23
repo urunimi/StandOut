@@ -1,5 +1,32 @@
 apply plugin: 'com.android.library'
 
+ext {
+    def id = 'standout'
+    def desc = 'Android library for creating floating windows in your Android app.'
+
+    bintrayName = id
+    libraryName = desc
+    artifact = id
+    libraryDescription = desc
+
+    bintrayRepo = 'maven'
+    publishedGroupId = 'com.hovans.android'
+    bintrayUserOrg = null
+
+    siteUrl = 'https://github.com/urunimi/android-standout'
+    gitUrl = 'https://github.com/urunimi/android-standout'
+
+    libraryVersion = '1.0.0'
+
+    developerId = 'urunimi'
+    developerName = 'Pyungwoo Yoo'
+    developerEmail = 'hovan@hovans.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion COMPILE_SDK_VERSION
     buildToolsVersion BUILD_TOOLS_VERSION
@@ -26,4 +53,5 @@ android {
     }
 }
 
-//apply from: 'https://raw.githubusercontent.com/urunimi/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply from: 'https://raw.githubusercontent.com/urunimi/j-center/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/urunimi/j-center/master/bintrayv1.gradle'

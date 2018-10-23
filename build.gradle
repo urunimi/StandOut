@@ -1,19 +1,14 @@
 buildscript {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 
     dependencies {
         classpath('com.android.tools.build:gradle:3.1.1')
+        classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:1.+")
+        classpath("com.github.dcendents:android-maven-gradle-plugin:1.4.1")
     }
-}
-
-ext {
-    COMPILE_SDK_VERSION = 28
-    BUILD_TOOLS_VERSION = "28.0.3"
-    MIN_SDK_VERSION = 21
-    TARGET_SDK_VERSION = 26
 }
 
 def isReleaseBuild() {
@@ -22,8 +17,20 @@ def isReleaseBuild() {
 
 allprojects {
     repositories {
-        mavenCentral()
+        google()
+        jcenter()
     }
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+    }
+    ext.androidMinSDKVersion = 8
+    ext.androidTargetSDKVersion = 19
 }
 
-apply plugin: 'android-reporting'
+ext {
+    COMPILE_SDK_VERSION = 28
+    BUILD_TOOLS_VERSION = "28.0.2"
+    TARGET_SDK_VERSION = 26
+    MIN_SDK_VERSION = 21
+}
