@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -36,6 +37,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import static android.view.WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+import static android.view.WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
 
 /**
  * Extend this class to easily create and manage floating StandOut windows.
@@ -1759,6 +1763,23 @@ public abstract class StandOutWindow extends Service {
 		}
 	}
 
+	static Integer WINDOW_TYPE = null;
+
+	int getWindowType() {
+		if (WINDOW_TYPE == null) {
+			try {
+				ApplicationInfo applicationInfo = getApplicationInfo();
+				if (applicationInfo != null) {
+					WINDOW_TYPE = applicationInfo.targetSdkVersion >= 26 ? TYPE_APPLICATION_OVERLAY : TYPE_SYSTEM_ALERT;
+				}
+			} catch (Throwable e) {
+				e.printStackTrace();
+				WINDOW_TYPE = TYPE_SYSTEM_ALERT;
+			}
+		}
+		return WINDOW_TYPE;
+	}
+
 	/**
 	 * LayoutParams specific to floating StandOut windows.
 	 *
@@ -1809,7 +1830,7 @@ public abstract class StandOutWindow extends Service {
 		 *            The id of the window.
 		 */
 		public StandOutLayoutParams(int id) {
-			super(200, 200, TYPE_APPLICATION_OVERLAY,
+			super(200, 200, getWindowType(),
 					StandOutLayoutParams.FLAG_NOT_TOUCH_MODAL
 							| StandOutLayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
 					PixelFormat.TRANSLUCENT);

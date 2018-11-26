@@ -16,7 +16,7 @@ ext {
     siteUrl = 'https://github.com/urunimi/android-standout'
     gitUrl = 'https://github.com/urunimi/android-standout'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.0.1'
 
     developerId = 'urunimi'
     developerName = 'Pyungwoo Yoo'
